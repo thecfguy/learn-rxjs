@@ -1,6 +1,9 @@
 //Observable
-// import intervalObservable from "./observables/interval";
-// intervalObservable();
+import intervalObservable from "./observables/interval";
+intervalObservable();
+
+// import rangeObservable from "./observables/range";
+// rangeObservable();
 
 //Operators
 
@@ -37,5 +40,8 @@
 // import takeUntilOperator from "./operators/takeUntil";
 // takeUntilOperator();
 
-import takeWhileOperator from "./operators/takeWhile";
-takeWhileOperator();
+// import takeWhileOperator from "./operators/takeWhile";
+// takeWhileOperator();
+
+// import skipOperator from "./operators/skip";
+// skipOperator();
