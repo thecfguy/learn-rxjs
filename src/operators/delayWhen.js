@@ -3,26 +3,36 @@
  * to entire subscription delayed.
  * */
 
-import { fromEvent, interval } from "rxjs";
-import { delayWhen } from "rxjs/operators";
+import { interval } from "rxjs";
+import { delayWhen, take } from "rxjs/operators";
 
 const delayWhenOperator = () => {
   //#region #1
-  // const clicks = fromEvent(document, "click");
-  // const delayedClicks = clicks.pipe(
-  //   delayWhen((event) => interval(Math.random() * 5000))
+  // const source = interval(500);
+
+  // const delayDurationSelector = (value) => {
+  //   const duration = parseInt(500 + Math.random() * 3000);
+  //   console.log(`${value} delayed for ${duration} ms`);
+  //   return interval(duration);
+  // };
+
+  // const result = source.pipe(delayWhen(delayDurationSelector), take(5));
+  // result.subscribe((value) =>
+  //   console.log(`%c Value emitted ${value}`, "color: #bada55")
   // );
-  // delayedClicks.subscribe((x) => console.log(x));
   //#endregion
 
   //#region #2
-  const clicks2 = fromEvent(document, "click");
-  const delayedClicks = clicks2.pipe(
-    delayWhen((event) => interval(Math.random() * 1000), interval(5000))
+  const source = interval(1000);
+  const delayDurationSelector = (value) => interval(1000);
+  const subscriptionDelay = interval(2000);
+  const result = source.pipe(
+    delayWhen(delayDurationSelector, subscriptionDelay),
+    take(5)
   );
-  console.log(`Subscribed at ${new Date()}`);
-  delayedClicks.subscribe((x) =>
-    console.log(`Clicked emitted at position ${x.screenX} at ${new Date()}`)
+  console.log(`Subscribed to result`);
+  result.subscribe((value) =>
+    console.log(`%c Value emitted ${value}`, "color: #bada55")
   );
   //#endregion
 };
