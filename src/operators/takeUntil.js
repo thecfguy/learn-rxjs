@@ -1,14 +1,13 @@
-import { range, Observable, interval } from "rxjs";
+import { interval } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 const takeUntilOperator = () => {
   //#region #1
-  const numbers = interval(1000);
+  const source = interval(1000);
   const notifier = interval(5000);
-  const result = numbers.pipe(takeUntil(notifier));
-  result.subscribe((value) =>
-    console.log(`Value ${value} generated at ${new Date()}`)
-  );
+
+  const result = source.pipe(takeUntil(notifier));
+  result.subscribe((value) => console.log(`Emitted value ${value}`));
   //#endregion
 };
 

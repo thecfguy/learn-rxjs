@@ -3,16 +3,16 @@ import { takeWhile } from "rxjs/operators";
 
 const takeWhileOperator = () => {
   //#region #1
-  const numbers = interval(1000);
-  const result = numbers.pipe(
-    takeWhile((value, index) => {
-      console.log(value, index);
-      return value < 4;
-    })
-  );
+  const source = range(10, 20);
+
+  const predicate = (value, index) => {
+    console.log(value, index);
+    return value < 15;
+  };
+  const result = source.pipe(takeWhile(predicate, true));
 
   result.subscribe((value) =>
-    console.log(`Value ${value} generated at ${new Date()}`)
+    console.log(`%c Emitted value: ${value}`, "color:#bada55")
   );
   //#endregion
 };
